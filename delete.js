@@ -9,11 +9,6 @@ export const main = handler(async (event, context) => {
             notesID: event.pathParameters.id,
         },
     };
-
-    const result = await dynamoDB.get(params);
-    if (!result.Item) {
-        throw new Error("Item not found.");
-    }
-
-    return result.Item;
+    await dynamoDB.delete(params);
+    return {status: true};
 });
